@@ -36,6 +36,12 @@ func Print_array_string(arr []string) {
 	}
 }
 
+func Print_array_int(arr []int) {
+	for _, line := range arr[:] {
+		println(line)
+	}
+}
+
 type RuneStack []rune
 
 // Push adds a rune to the top of the stack.
