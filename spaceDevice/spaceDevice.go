@@ -2,6 +2,7 @@ package main
 
 import (
 	"go_advent/utility"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -12,7 +13,7 @@ func main() {
 	// utility.Print_array_string(lines)
 	dirs := make(map[string]int)
 	sub_dirs := make(map[string][]string)
-	keys := []string{}
+	keys := []string{"/root/home"}
 
 	ls_check := false
 	current_dir := "/root"
@@ -53,12 +54,11 @@ func main() {
 	for _, k := range keys {
 		for _, v := range sub_dirs[k] {
 			dirs[k] += dirs[string(v)]
-			println(k, string(v), dirs[string(v)])
 		}
 	}
 
 	for k, v := range dirs {
-		println(k, v)
+		println(k + " -> " + strconv.Itoa(v))
 	}
 
 	sum_sub_dirs := 0
@@ -67,6 +67,26 @@ func main() {
 			sum_sub_dirs += v
 		}
 	}
-	println(sum_sub_dirs)
+	println("Total size sub dirs " + strconv.Itoa(sum_sub_dirs))
+
+	// task 2
+	total_home_size := dirs["/root/home"]
+	unused_size := 70000000 - total_home_size
+	println("Unused size " + strconv.Itoa(unused_size))
+
+	// all values of dirs into an array
+	sizes := make([]int, 0, len(dirs))
+	for _, v := range dirs {
+		sizes = append(sizes, v)
+	}
+
+	// sort array
+	sort.Ints(sizes)
+	for i, v := range sizes {
+		if 30000000 < unused_size+v {
+			println("Min size " + strconv.Itoa(sizes[i]))
+			break
+		}
+	}
 
 }

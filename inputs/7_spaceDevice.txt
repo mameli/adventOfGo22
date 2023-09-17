@@ -1,4 +1,4 @@
-$ cd /
+$ cd home
 $ ls
 dir bqc
 dir mwmlf
